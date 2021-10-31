@@ -1,4 +1,4 @@
-package curve;
+package spaghetti.curve;
 
 public abstract class AttractorAnimator {
 

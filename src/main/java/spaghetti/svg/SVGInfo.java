@@ -1,4 +1,4 @@
-package svg;
+package spaghetti.svg;
 
 import java.awt.Rectangle;
 import java.io.File;
@@ -10,7 +10,7 @@ import org.apache.batik.bridge.DocumentLoader;
 import org.apache.batik.bridge.GVTBuilder;
 import org.apache.batik.bridge.UserAgent;
 import org.apache.batik.bridge.UserAgentAdapter;
-import org.apache.batik.dom.svg.SVGDOMImplementation;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.dom.util.DocumentFactory;
 import org.apache.batik.dom.util.SAXDocumentFactory;
 import org.apache.batik.gvt.GraphicsNode;
@@ -26,22 +26,22 @@ public class SVGInfo {
         BridgeContext ctx;
         GVTBuilder builder;
         GraphicsNode rootGN;
-        
-        
+
+
         DOMImplementation domImpl = SVGDOMImplementation.getDOMImplementation();
 
         // Create an instance of org.w3c.dom.Document.
         String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
-        
+
         DocumentFactory f = new SAXDocumentFactory(domImpl, null);
-        
+
         try {
 			FileInputStream input = new FileInputStream(svgFile);
-		
-        
+
+
 	        svgDoc = (SVGDocument) f.createDocument(svgNS, "svg", svgFile.toURI().toString(), input);
-	
-	        
+
+
 	//        svgDoc = new SVGDocum
 	        userAgent = new UserAgentAdapter();
 	        loader = new DocumentLoader(userAgent);
@@ -49,9 +49,9 @@ public class SVGInfo {
 	        ctx.setDynamicState(BridgeContext.DYNAMIC);
 	        builder = new GVTBuilder();
 	        rootGN = builder.build(ctx, svgDoc);
-	        
+
 	        return rootGN.getBounds().getBounds();
-        
+
         } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package curve;
+package spaghetti.curve;
 
 import java.awt.Component;
 import java.awt.Dimension;

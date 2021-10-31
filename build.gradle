@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'spaghetti.main.Main'
+
+dependencies {
+    implementation 'org.apache.xmlgraphics:batik-all:1.14'
+}

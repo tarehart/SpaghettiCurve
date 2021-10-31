@@ -1,4 +1,4 @@
-package gui;
+package spaghetti.gui;
 
 import java.awt.BasicStroke;
 import java.awt.Canvas;
@@ -14,9 +14,9 @@ import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import curve.AttractorAnimator;
-import curve.Curve;
-import curve.CurveAttractor;
+import spaghetti.curve.AttractorAnimator;
+import spaghetti.curve.Curve;
+import spaghetti.curve.CurveAttractor;
 
 public class CurveCanvas extends Canvas {
 

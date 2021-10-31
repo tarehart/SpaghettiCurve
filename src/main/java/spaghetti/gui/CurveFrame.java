@@ -1,4 +1,4 @@
-package gui;
+package spaghetti.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -21,63 +21,63 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
-import curve.AttractorAnimator;
-import curve.AttractorAnimator.Temperament;
+import spaghetti.curve.AttractorAnimator;
+import spaghetti.curve.AttractorAnimator.Temperament;
 
-import svg.SVGExporter;
+import spaghetti.svg.SVGExporter;
 
 public class CurveFrame extends JFrame {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3434999019395338309L;
 	private CurveCanvas canvas;
-	
+
 	public CurveFrame() {
-		
+
 		//setIgnoreRepaint(true);
-		
-		
+
+
 		canvas = new CurveCanvas();
-		
+
 		canvas.setIgnoreRepaint(true);
-		
+
 		setLayout(new BorderLayout());
 		add(canvas, BorderLayout.WEST);
 		add(new JPanel(), BorderLayout.CENTER);
 		add(createButtonPanel(), BorderLayout.NORTH);
 		//add(createTablePanel(), BorderLayout.EAST);
-		
-		
+
+
 		canvas.setBounds(0, 0, 600, 300);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
-		
+
 	}
-	
-	
+
+
 	private JPanel createButtonPanel() {
 		JToggleButton playpause = new JToggleButton("Play");
-		
+
 		final JSlider speed = new JSlider(0, 16);
 		speed.setSnapToTicks(true);
 		speed.setMajorTickSpacing(1);
-		
+
 		final JButton export = new JButton("Export to SVG");
-		
+
 		final JButton convert = new JButton("Render exisiting SVG");
-		
+
 		speed.addChangeListener(new ChangeListener(){
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				canvas.setFramesDropped((int) Math.pow(2, speed.getValue()) - 1);
-				
+
 			}});
-		
-		
-		
+
+
+
 		playpause.addMouseListener(new MouseListener(){
 
 			@Override
@@ -96,10 +96,10 @@ public class CurveFrame extends JFrame {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 			}
-			
+
 		});
-		
-		
+
+
 		export.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -111,19 +111,19 @@ public class CurveFrame extends JFrame {
 			       SVGExporter.CurveToSVG(canvas.getCurve(), f);
 			       //SVGExporter.CurveToPNG(canvas.getCurve(), f, canvas.getBounds());
 			    }
-				
+
 			}});
-		
+
 		convert.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				RenderForm form = new RenderForm();
 				form.setVisible(true);
-				
+
 			}
 		});
-		
+
 		final JCheckBox order = new JCheckBox("Order");
 		final JCheckBox chaos = new JCheckBox("Chaos");
 		order.addChangeListener(new ChangeListener() {
@@ -132,64 +132,64 @@ public class CurveFrame extends JFrame {
 				EnumSet<AttractorAnimator.Temperament> temp = EnumSet.noneOf(AttractorAnimator.Temperament.class);
 				if (order.isSelected()) temp.add(Temperament.Orderly);
 				if (chaos.isSelected()) temp.add(Temperament.Chaotic);
-				
+
 				canvas.setTemperament(temp);
 			}
 		});
-		
-		
+
+
 		chaos.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				EnumSet<AttractorAnimator.Temperament> temp = EnumSet.noneOf(AttractorAnimator.Temperament.class);
 				if (order.isSelected()) temp.add(Temperament.Orderly);
 				if (chaos.isSelected()) temp.add(Temperament.Chaotic);
-				
+
 				canvas.setTemperament(temp);
 			}
 		});
-		
-		
-		
-		
+
+
+
+
 		JPanel panel = new JPanel();
-		
+
 		panel.add(playpause);
 		panel.add(speed);
 		panel.add(order);
 		panel.add(chaos);
 		panel.add(export);
 		panel.add(convert);
-		
+
 		return panel;
 	}
-	
-	
+
+
 	private JPanel createTablePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		
+
 		final DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("X Speed");
 		model.addColumn("Y Speed");
 		JTable table = new JTable(model);
 		table.setFillsViewportHeight(false);
-		
+
 		panel.add(table.getTableHeader(), BorderLayout.PAGE_START);
 		panel.add(table, BorderLayout.CENTER);
-		
+
 		final JTextField xinput = new JTextField(5);
 		final JTextField yinput = new JTextField(5);
 		JButton addBtn = new JButton("Add");
-		
+
 		JPanel buttonPanel = new JPanel();
-		
+
 		buttonPanel.add(xinput, BorderLayout.NORTH);
 		buttonPanel.add(yinput, BorderLayout.NORTH);
 		buttonPanel.add(addBtn, BorderLayout.NORTH);
-		
+
 		panel.add(buttonPanel, BorderLayout.SOUTH);
-		
+
 		addBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -202,14 +202,14 @@ public class CurveFrame extends JFrame {
 					xinput.setText("");
 					yinput.setText("");
 				}
-				
+
 			}});
-		
+
 		return panel;
 	}
-	
+
 	public CurveCanvas getCanvas() {
 		return canvas;
 	}
-	
+
 }

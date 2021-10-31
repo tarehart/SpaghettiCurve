@@ -1,14 +1,14 @@
-package main;
+package spaghetti.main;
 
-import curve.BouncingAttractor;
-import curve.CirclingAttractor;
-import curve.Curve;
-import curve.CurveAttractor;
-import curve.SteadyLoopAttractor;
-import curve.WallCirclingAttractor;
-import curve.WiggleLoopAttractor;
-import gui.CurveCanvas;
-import gui.CurveFrame;
+import spaghetti.curve.BouncingAttractor;
+import spaghetti.curve.CirclingAttractor;
+import spaghetti.curve.Curve;
+import spaghetti.curve.CurveAttractor;
+import spaghetti.curve.SteadyLoopAttractor;
+import spaghetti.curve.WallCirclingAttractor;
+import spaghetti.curve.WiggleLoopAttractor;
+import spaghetti.gui.CurveCanvas;
+import spaghetti.gui.CurveFrame;
 
 public class Main {
 
@@ -19,14 +19,14 @@ public class Main {
 		CurveFrame frame = new CurveFrame();
 		CurveCanvas canvas = frame.getCanvas();
 
-		
+
 		// 1, 1.32
 		// .3, 1.7
 		// .3, 1.8
-		
+
 		//Curve.maxSpacing = 5;
 		//Curve.minSpacing = 4;
-		
+
 		canvas.addCurve(new Curve());
 		CurveAttractor attractor = new CurveAttractor(.035f, 60);
 		CurveAttractor weak1 = new CurveAttractor(.03f, 60);
@@ -36,21 +36,21 @@ public class Main {
 		CurveAttractor attractor6 = new CurveAttractor(.035f, 60);
 		CurveAttractor attractor7 = new CurveAttractor(.03f, 60);
 		CurveAttractor attractor8 = new CurveAttractor(.03f, 60);
-		
+
 		//BouncingAttractor ba = new BouncingAttractor(attractor8, canvas, 1f, 1.158f);
 		CirclingAttractor ca = new CirclingAttractor(canvas, .14f, .23f, 80, 60, .025f);
 		CirclingAttractor ca2 = new WallCirclingAttractor(canvas, .5f, 40, 30, .03f);
 		//BouncingAttractor ba2 = new BouncingAttractor(attractor6, canvas, .2f, 1.6f);
-		
+
 		//SteadyLoopAttractor sa = new SteadyLoopAttractor(attractor5, canvas, 105, 290, 80, .03f);
 		//WiggleLoopAttractor srev = new WiggleLoopAttractor(attractor6, canvas, 105, 290, 60, 40, -.035f);
-		
+
 		//SteadyLoopAttractor sa3 = new SteadyLoopAttractor(attractor7, canvas, 695, 110, 80, .03f);
-		
+
 		SteadyLoopAttractor sa2 = new SteadyLoopAttractor(weak1, canvas, 300, 150, 120, .019f);
 
 		SteadyLoopAttractor sa4 = new SteadyLoopAttractor(weak2, canvas, 300, 150, 60, -.039f);
-		
+
 		canvas.addAttractor(ca);
 		//canvas.addAttractor(sa);
 		canvas.addAttractor(sa2);
@@ -60,10 +60,10 @@ public class Main {
 		//canvas.addAttractor(srev);
 		canvas.addAttractor(ca2);
 		//canvas.addAttractor(ba2);
-		
-		
+
+
 		frame.setVisible(true);
-		
+
 		canvas.startLoop();
 
 	}
